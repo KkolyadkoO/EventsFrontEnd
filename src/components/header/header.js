@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 const Header = () => {
     return ( <div className="header">
         <div className="logo">
-          Events.by
+        <Link to="/">Events.by</Link>
         </div>
         <div className="auth-buttons">
           <Link to="/login">Log in</Link>
-          <a href="#">Log out</a>
+          <Link to="/register">Register</Link>
         </div>
       </div> 
       );

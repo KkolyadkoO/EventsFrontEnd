@@ -8,3 +8,10 @@
 .content {
     flex: 1 1 auto;
 }
+
+body{
+    background: url(../../public/background.jpg);
+    background-attachment: fixed;
+    background-size: cover; /* чтобы картинка покрывала весь экран */
+    background-position: center; /* центрирование картинки */
+}
