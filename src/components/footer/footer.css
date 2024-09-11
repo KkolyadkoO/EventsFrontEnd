@@ -1,0 +1,54 @@
+/* Стили для футера */
+.footer {
+    background-color: #1B778D; /* Цвет фона футера */
+    color: #ffffff; /* Цвет текста */
+    padding: 20px 0;
+    text-align: center;
+  }
+  
+  .footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  .footer-logo {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .footer-links {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .footer-links a {
+    text-decoration: none;
+    color: #ffffff;
+    transition: color 0.3s ease;
+  }
+  
+  .footer-links a:hover {
+    color: #83c5be; /* Цвет при наведении */
+  }
+  
+  .footer-copyright {
+    font-size: 14px;
+  }
+  
+  /* Адаптация для мобильных устройств */
+  @media (max-width: 768px) {
+    .footer-content {
+      flex-direction: column;
+      gap: 10px;
+    }
+  
+    .footer-links {
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+  
