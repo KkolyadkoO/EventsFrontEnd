@@ -19,7 +19,7 @@
     font-weight: inherit; 
   }
   
-   .auth-buttons {
+.auth-buttons {
     display: flex;
     gap: 15px;
   }

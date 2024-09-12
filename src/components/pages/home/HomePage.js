@@ -1,8 +1,12 @@
-import Header from '../../header/header';
-import Footer from '../../footer/footer';
+import Header from '../../header/Header';
+import Footer from '../../footer';
+import EventCard from "../../eventCard";
+import "./HomePage.css"
 import { getCategoriesOfEvents } from '../../../api/api';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import {Link} from "react-router-dom";
+import LoginPage from "../login/LoginPage";
 
 const HomePage = () => {
   const [response, setResponse] = useState(null); 
@@ -24,8 +28,10 @@ const HomePage = () => {
     <div className='wrapper'>
       <Header />
       <div className='content'>
-        {/* <button onClick={handelClick}>Click</button> */}
-        {response && <div>{response.map(item=>(<div>{item.title}</div>))}</div>} {}
+        <Link to="/view_event" draggable={"false"}>
+          <EventCard />
+        </Link>
+
       </div>
       <Footer />
     </div>

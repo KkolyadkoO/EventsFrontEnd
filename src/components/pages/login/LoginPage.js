@@ -1,7 +1,7 @@
-import Header from '../../header/header';
-import Footer from '../../footer/footer';
-import LoginForm from '../../loginForm';
-import './style.css';
+import Header from '../../header/Header';
+import Footer from '../../footer';
+import LoginForm from "../../form/loginForm/LoginForm";
+import './LoginPage.css';
 
 
 const LoginPage = () => {
