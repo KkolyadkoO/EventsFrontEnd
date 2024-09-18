@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, {useContext, useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import './styles.css';
-import { RegistrationNewUser } from "../../../api/services/user";
+import {Context} from "../../../index";
 
 const RegistrationForm = () => {
     const navigate = useNavigate();
+    const {store} = useContext(Context);
 
 
     const [formData, setFormData] = useState({
@@ -24,8 +25,8 @@ const RegistrationForm = () => {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
-            await RegistrationNewUser(formData);
-            navigate("/login");
+            await store.Registration(formData.userName, formData.userEmail, formData.password, formData.role);
+            // navigate("/login");
         } catch (error: any) {
             alert(error.message);
         }

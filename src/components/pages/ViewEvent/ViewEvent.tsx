@@ -1,6 +1,6 @@
-import Header from "../../header/Header";
-import Footer from "../../footer";
-import InformationOfEvent from "../../informationAboutEvent/InformationOfEvent";
+import Header from "../../Header";
+import Footer from "../../Footer";
+import InformationOfEvent from "../../InformationAboutEvent";
 
 const ViewEvent = () => {
     return (

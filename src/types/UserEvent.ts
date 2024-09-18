@@ -1,4 +1,4 @@
-import {memberOfEvent} from "./memberOfEvent";
+import {memberOfEvent} from "./MemberOfEvent";
 
 export  interface UserEvent {
     id: string;

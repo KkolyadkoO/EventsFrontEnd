@@ -1,5 +1,5 @@
-import './style.css'
-import {UserEvent} from "../../Models/userEvent";
+import './styles.css'
+import {UserEvent} from "../../types/UserEvent";
 
 type Props = {
     event: UserEvent;

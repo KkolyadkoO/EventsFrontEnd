@@ -1,4 +1,4 @@
-import './InformationOfEvent.css'
+import './styles.css'
 
 const InformationOfEvent = () => {
     return (

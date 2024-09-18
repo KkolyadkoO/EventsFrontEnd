@@ -1,12 +1,12 @@
-import Header from '../../header/Header';
-import Footer from '../../footer';
-import EventCard from "../../eventCard";
-import "./HomePage.css"
+import Header from '../../Header';
+import Footer from '../../Footer';
+import EventCard from "../../EventCard";
+import "./styles.css"
 import { getCategoriesOfEvents } from '../../../api/api';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import {Link} from "react-router-dom";
-import LoginPage from "../login/LoginPage";
+import LoginPage from "../Login";
 
 const HomePage = () => {
   const [response, setResponse] = useState(null); 
@@ -29,7 +29,7 @@ const HomePage = () => {
       <Header />
       <div className='content'>
         <Link to="/view_event" draggable={"false"}>
-          <EventCard event={}/>
+
         </Link>
 
       </div>
