@@ -1,41 +1,41 @@
 import Header from '../../Header';
 import Footer from '../../Footer';
-import EventCard from "../../EventCard";
 import "./styles.css"
-import { getCategoriesOfEvents } from '../../../api/api';
-import { useState } from 'react';
-import { useEffect } from 'react';
 import {Link} from "react-router-dom";
-import LoginPage from "../Login";
+import {useContext, useEffect} from "react";
+import {Context} from "../../../index";
+import {observer} from "mobx-react-lite";
 
 const HomePage = () => {
-  const [response, setResponse] = useState(null); 
+    const {store} = useContext(Context);
 
-  const getCategories = async () => {
-    try {
-      const result = await getCategoriesOfEvents(); 
-      console.log(result); 
-      setResponse(result); 
-    } catch (error) {
-      console.error("Error fetching categories:", error); 
+    useEffect(() => {
+        if (localStorage.getItem("accessToken")){
+           store.checkAuth();
+        }
+
+    }, []);
+
+    if (store.isLoading){
+        return (
+            <div>...Loading</div>
+        );
     }
-  };
 
-  useEffect(() =>{
-    getCategories();
-  },[]);
-  return ( 
-    <div className='wrapper'>
-      <Header />
-      <div className='content'>
-        <Link to="/view_event" draggable={"false"}>
+    return (
 
-        </Link>
+        <div className='wrapper'>
+            <Header/>
+            <div className='content'>
+                <h1>{store.isAuth ? `Пользователь авторизован ${store.user.userName}` : 'Авторизуйтесь'}</h1>
+                <Link to="/view_event" draggable={"false"}>
 
-      </div>
-      <Footer />
-    </div>
-  );
+                </Link>
+
+            </div>
+            <Footer/>
+        </div>
+    );
 }
 
-export default HomePage;
+export default observer(HomePage);

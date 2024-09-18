@@ -14,7 +14,7 @@ const LoginForm = () => {
         e.preventDefault();
         try{
             await store.Login(userName, password);
-            // navigate("/");
+            navigate("/");
         } catch (e: any){
             console.error(e.response.data);
         }

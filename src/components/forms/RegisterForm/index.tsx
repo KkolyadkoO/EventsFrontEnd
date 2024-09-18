@@ -26,7 +26,7 @@ const RegistrationForm = () => {
         e.preventDefault();
         try {
             await store.Registration(formData.userName, formData.userEmail, formData.password, formData.role);
-            // navigate("/login");
+            navigate("/login");
         } catch (e: any) {
             console.error(e.response.data);
         }
