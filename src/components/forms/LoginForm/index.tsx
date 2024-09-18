@@ -10,7 +10,7 @@ const LoginForm = () => {
     const [password, setPassword] = useState<string>('');
     const {store} = useContext(Context);
 
-    const hangleLogin = async (e: React.FormEvent) => {
+    const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
         try{
             await store.Login(userName, password);
@@ -21,7 +21,7 @@ const LoginForm = () => {
     }
 
     return (
-        <form className='LoginForm' onSubmit={hangleLogin}>
+        <form className='LoginForm' onSubmit={handleLogin}>
             <h1>LOG IN</h1>
             <input
                 type="text"
