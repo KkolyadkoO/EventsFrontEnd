@@ -27,20 +27,20 @@ export default class Store {
             this.setUser(response.data.usersResponse);
             console.log(this.user);
         } catch (e){
-            console.error(e);
+            throw e;
         }
     }
     async Registration(userName: string, userEmail: string,  password: string, role: string) {
         try {
             await AuthService.registration(userName, userEmail, password, role);
         } catch (e){
-            console.error(e);
+            throw e;
         }
     }
 
     async Logout() {
         try {
-            const response = await AuthService.logout();
+            await AuthService.logout();
             localStorage.removeItem('accessToken');
             this.setAuth(false);
             this.setUser({} as IUser);

@@ -15,8 +15,8 @@ const LoginForm = () => {
         try{
             await store.Login(userName, password);
             // navigate("/");
-        } catch (e){
-            console.error(e);
+        } catch (e: any){
+            console.error(e.response.data);
         }
     }
 

@@ -27,8 +27,8 @@ const RegistrationForm = () => {
         try {
             await store.Registration(formData.userName, formData.userEmail, formData.password, formData.role);
             // navigate("/login");
-        } catch (error: any) {
-            alert(error.message);
+        } catch (e: any) {
+            console.error(e.response.data);
         }
     };
 
