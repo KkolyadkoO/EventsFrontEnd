@@ -29,7 +29,7 @@ const HomePage = () => {
       <Header />
       <div className='content'>
         <Link to="/view_event" draggable={"false"}>
-          <EventCard />
+          <EventCard event={}/>
         </Link>
 
       </div>

@@ -1,6 +1,6 @@
 import {memberOfEvent} from "./memberOfEvent";
 
-export  interface event {
+export  interface UserEvent {
     id: string;
     title: string;
     description: string;

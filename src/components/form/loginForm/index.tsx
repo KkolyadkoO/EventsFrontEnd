@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import './LoginForm.css';
+import './styles.css';
 import { Login } from "../../../api/services/user";
+import {useNavigate} from "react-router-dom";
 
 
 const LoginForm = () => {
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
-        userName: '',
+        username: '',
         password: ''
     });
 
@@ -19,8 +21,9 @@ const LoginForm = () => {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
-            await Login(formData); // Call the login function with the form data
-            alert('Login successful');
+            const user = await Login(formData);
+            console.log(user);
+            navigate("/");
         } catch (error) {
             alert('Login failed');
         }
@@ -31,9 +34,9 @@ const LoginForm = () => {
             <h1>LOG IN</h1>
             <input
                 type="text"
-                name="userName"
+                name="username"
                 placeholder="Enter Login"
-                value={formData.userName}
+                value={formData.username}
                 onChange={handleChange}
                 required
             />

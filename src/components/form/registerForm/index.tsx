@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
-import './RegisterForm.css';
+import {useNavigate} from "react-router-dom";
+import './styles.css';
 import { RegistrationNewUser } from "../../../api/services/user";
 
 const RegistrationForm = () => {
+    const navigate = useNavigate();
+
+
     const [formData, setFormData] = useState({
         userName: '',
         userEmail: '',
         password: '',
-        role: 'User'  // You can set a default role if needed
+        role: 'User'
     });
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -20,11 +24,10 @@ const RegistrationForm = () => {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
-            await RegistrationNewUser(formData); // Call the registration function
-            alert('User registered successfully!');
-        } catch (error) {
+            await RegistrationNewUser(formData);
+            navigate("/login");
+        } catch (error: any) {
             alert(error.message);
-            console.error(error.message);
         }
     };
 

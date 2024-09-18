@@ -1,6 +1,6 @@
 import Header from '../../header/Header';
 import Footer from '../../footer';
-import LoginForm from "../../form/loginForm/LoginForm";
+import LoginForm from "../../form/loginForm";
 import './LoginPage.css';
 
 
