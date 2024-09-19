@@ -28,7 +28,6 @@ const HomePage = () => {
             }
 
         }
-
         fetchEvents();
     }, []);
 
