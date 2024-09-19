@@ -1,3 +1,11 @@
 a {
     text-decoration: none;
 }
+.events {
+    margin-top: 10dvh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    width: 70%;
+    gap: 15px;
+}

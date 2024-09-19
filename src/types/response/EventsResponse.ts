@@ -1,6 +1,4 @@
-import {memberOfEvent} from "./MemberOfEvent";
-
-export  interface UserEvent {
+export interface EventsResponse {
     id: string;
     title: string;
     description: string;
@@ -8,6 +6,6 @@ export  interface UserEvent {
     location: string;
     categoryId: string;
     maxNumberOfMembers: number;
-    membersOfEvent: memberOfEvent[];
+    numberOfMembers: number;
     imageUrl: string;
 }

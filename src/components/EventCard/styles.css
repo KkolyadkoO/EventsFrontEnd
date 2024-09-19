@@ -1,28 +1,40 @@
-.event-card{
+.event-card {
     background-color: #5e85fb;
     border-radius: 10px;
     display: flex;
-    justify-content: center;
     flex-direction: column;
+    justify-content: flex-start; /* Прижимает элементы к верху */
     align-items: center;
+    width: 310px;
+    height: 550px; /* Фиксированная высота карточки */
+    padding: 10px;
+    box-sizing: border-box;
 }
 
-.event-image{
+.event-image {
     border-radius: 10px;
-    padding: 5px;
-    pointer-events: none;
+    width: 300px;
+    height: 400px;
+    object-fit: cover; /* Подгоняет изображение без искажений */
+    margin: 0; /* Убирает любые отступы вокруг картинки */
 }
 
-.event-title{
+.event-title {
     font-size: 20pt;
     font-weight: 900;
     color: #dfdcdc;
+    max-width: 100%;
+    text-align: center;
+    word-wrap: break-word;
+    margin-top: 10px;
 }
 
-.event-date{
-    padding: 0 10px 10px;
+.event-date {
     font-size: 16pt;
     font-weight: 700;
     color: #c6c4c4;
-
+    max-width: 100%;
+    text-align: center;
+    margin-top: auto; /* Отталкивает дату к низу карточки */
+    margin-bottom: 10px;
 }

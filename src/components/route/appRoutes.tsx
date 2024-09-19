@@ -12,7 +12,7 @@ const AppRoutes = () => {
                     <Route path='/login' element={<LoginPage />}> </Route>
                     <Route path='/register' element={<RegisterPage />}> </Route>
                     <Route path='/logout' element={<RegisterPage />}> </Route>
-                    <Route path='/view_event' element={<ViewEvent />}> </Route>
+                    <Route path='/view_event/:id' element={<ViewEvent />}> </Route>
 				</Routes>
 			</Router>
 	);
