@@ -3,6 +3,7 @@ a {
 }
 .events {
     margin-top: 10dvh;
+    margin-bottom: 10vh;
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
