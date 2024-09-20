@@ -14,9 +14,6 @@ const HomePage = () => {
     const [events, setEvents] = useState<EventsResponse[]>([]);
 
     useEffect(() => {
-        if (localStorage.getItem("accessToken")){
-           store.checkAuth();
-        }
         const fetchEvents = async () => {
             try {
                 const response = await EventsService.getAllEvents();

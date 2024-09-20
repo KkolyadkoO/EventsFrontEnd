@@ -13,9 +13,6 @@ const HomePage = () => {
     const {store} = useContext(Context);
     const navigate = useNavigate();
     useEffect(() => {
-        if (localStorage.getItem("accessToken")){
-           store.checkAuth();
-        }
         if(!store.isAuth)
             navigate("/login");
     }, []);
@@ -31,7 +28,6 @@ const HomePage = () => {
         <div className='wrapper'>
             <Header/>
             <div className='content'>
-                {/*<h1>{store.isAuth ? `Пользователь авторизован ${store.user.userName}` : 'Авторизуйтесь'}</h1>*/}
 
 
 
