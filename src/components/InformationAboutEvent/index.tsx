@@ -1,6 +1,9 @@
 import './styles.css'
 import {EventsResponse} from "../../types/response/EventsResponse";
 import {CategoryOfEventResponse} from "../../types/response/CategoryOfEventResponse";
+import {Context} from "../../index";
+import {useContext} from "react";
+import {useNavigate} from "react-router-dom";
 
 type Props = {
     event: EventsResponse;
@@ -9,6 +12,9 @@ type Props = {
 
 
 const InformationOfEvent = ({event, category}: Props) => {
+    const { store } = useContext(Context);
+    const navigate = useNavigate();
+
     if (!event) {
         return <p>No event information available</p>;
     }
@@ -21,6 +27,15 @@ const InformationOfEvent = ({event, category}: Props) => {
             month: 'short',
             year: 'numeric',
         });
+    };
+
+    const handleOnClick = () => {
+        if(!store.isAuth){
+            navigate('/login');
+        }
+        else {
+            navigate(`/registration_on_event/${event.id}`);
+        }
     };
 
     return (
@@ -36,10 +51,10 @@ const InformationOfEvent = ({event, category}: Props) => {
                 <span className="info-text">{location}</span>
                 <span className="info-text">{category.title}</span>
             </div>
-            {(numberOfMembers == maxNumberOfMembers) ? (
+            {(numberOfMembers === maxNumberOfMembers) ? (
                 <button className="sing-up">Full</button>
             ) : (
-                <button className="sing-up">Sing up</button>
+                <button className="sing-up" onClick={handleOnClick}>Sing up</button>
             )}
 
         </div>

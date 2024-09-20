@@ -9,3 +9,4 @@ export interface EventsResponse {
     numberOfMembers: number;
     imageUrl: string;
 }
+
