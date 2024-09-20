@@ -3,10 +3,10 @@
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start; /* Прижимает элементы к верху */
+    justify-content: flex-start;
     align-items: center;
     width: 310px;
-    height: 550px; /* Фиксированная высота карточки */
+    height: 550px;
     padding: 10px;
     box-sizing: border-box;
 }
@@ -15,8 +15,8 @@
     border-radius: 10px;
     width: 300px;
     height: 400px;
-    object-fit: cover; /* Подгоняет изображение без искажений */
-    margin: 0; /* Убирает любые отступы вокруг картинки */
+    object-fit: cover;
+    margin: 0;
 }
 
 .event-title {
@@ -35,6 +35,6 @@
     color: #c6c4c4;
     max-width: 100%;
     text-align: center;
-    margin-top: auto; /* Отталкивает дату к низу карточки */
+    margin-top: auto;
     margin-bottom: 10px;
 }

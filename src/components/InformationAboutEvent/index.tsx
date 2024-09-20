@@ -38,10 +38,18 @@ const InformationOfEvent = ({event, category}: Props) => {
         }
     };
 
+    const formatImageUrl = (url:string): string => {
+        if (url){
+            url = url.replace(/\s+/g, "%20");
+            return `${process.env.PUBLIC_URL}/images/${url}%201280.webp`;
+        }
+        return url
+    };
+
     return (
         <div className="information-of-event">
             <span className="title">{title}</span>
-            <img className="image" src={imageUrl || "https://placehold.co/1280x720"} alt={title}/>
+            <img className="image" src={formatImageUrl(imageUrl) || "https://placehold.co/1280x720"} alt={title}/>
             <span className="description">{description}</span>
             <div className="info">
                 <span className="info-text">{formatDate(date)}</span>
