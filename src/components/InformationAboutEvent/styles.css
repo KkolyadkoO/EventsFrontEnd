@@ -65,23 +65,23 @@
     text-decoration: none;
     font-size: 24px;
     padding: 8px 16px;
-    color: rgb(181, 210, 218);
+    color: #3c609b;
     font-weight: bold;
-    background-color: #436cad;
-    box-shadow: 0 -3px #385b93 inset;
+    background-color: #ededed;
+    box-shadow: 0 -3px #b5b5b5 inset;
     border-radius: 5px;
     border: none;
     transition: background-color 0.3s ease;
 }
 
 .sing-up:hover {
-    background-color: #385b93;
+    background-color: #b5b5b5;
 
 }
 
 .sing-up:active {
-    background-color: #2e4b78;
-    box-shadow: 0 3px #2e4b78 inset;
+    background-color: #a3a3a3;
+    box-shadow: 0 3px #a3a3a3 inset;
 
 }
   
