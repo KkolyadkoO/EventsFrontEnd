@@ -16,7 +16,7 @@ const HomePage = () => {
     useEffect(() => {
         const fetchEvents = async () => {
             try {
-                const response = await EventsService.getAllEvents();
+                const response = await EventsService.getEventsByFilter("","","","","","1","12");
                 setEvents(response.data);
                 console.log(response.data);
 
