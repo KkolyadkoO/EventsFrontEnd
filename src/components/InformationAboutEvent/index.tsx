@@ -52,7 +52,7 @@ const InformationOfEvent = ({event, category}: Props) => {
                 <span className="info-text">{category.title}</span>
             </div>
             {(numberOfMembers === maxNumberOfMembers) ? (
-                <button className="sing-up">Full</button>
+                <button className="full-button">Full</button>
             ) : (
                 <button className="sing-up" onClick={handleOnClick}>Sing up</button>
             )}
