@@ -5,5 +5,5 @@ export interface MembersResponse {
     birthday: string;
     email: string;
     userId: string;
-    eventId: number;
+    eventId: string;
 }

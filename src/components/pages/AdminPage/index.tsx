@@ -1,16 +1,18 @@
-import Header from '../../Header';
-import Footer from '../../Footer';
-import "./styles.css";
-import {Link} from "react-router-dom";
+import {observer} from "mobx-react-lite";
+import Header from "../../Header";
+import Footer from "../../Footer";
 import {useContext, useEffect, useState} from "react";
 import {Context} from "../../../index";
-import {observer} from "mobx-react-lite";
-import {EventsService} from "../../../api/services/EventsService";
-import EventCard from "../../EventCard";
 import {EventsResponse} from "../../../types/response/EventsResponse";
+import {EventsService} from "../../../api/services/EventsService";
+import {Link, useNavigate} from "react-router-dom";
+import EventCard from "../../EventCard";
+import "./styles.css"
 
-const HomePage = () => {
+
+const AdminPage = () => {
     const {store} = useContext(Context);
+    const navigate = useNavigate();
     const [events, setEvents] = useState<EventsResponse[]>([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
@@ -19,6 +21,7 @@ const HomePage = () => {
     const [categoryFilter, setCategoryFilter] = useState("");
     const [startDateFilter, setStartDateFilter] = useState("");
     const [endDateFilter, setEndDateFilter] = useState("");
+    const [updateEvents, setUpdateEvents] = useState<boolean>(false);
 
     useEffect(() => {
         const fetchEvents = async () => {
@@ -44,7 +47,8 @@ const HomePage = () => {
             }
         };
         fetchEvents();
-    }, [currentPage, searchTerm, categoryFilter, startDateFilter, endDateFilter]);
+        setUpdateEvents(false);
+    }, [currentPage, searchTerm, categoryFilter, startDateFilter, endDateFilter, updateEvents]);
 
     useEffect(() => {
         setCurrentPage(1);
@@ -78,15 +82,31 @@ const HomePage = () => {
         });
     };
 
+    const handleDelete = async (id: string) => {
+        try {
+            await EventsService.deleteEvent(id);
+            setCurrentPage(1);
+            setUpdateEvents(true);
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
     return (
         <div className='wrapper'>
-            <Header onSearch={setSearchTerm} onCategory={setCategoryFilter} onStartDate={setStartDateFilter} onEndDate={setEndDateFilter}/>
+            <Header onSearch={setSearchTerm} onCategory={setCategoryFilter} onStartDate={setStartDateFilter}
+                    onEndDate={setEndDateFilter}/>
             <div className='content'>
+                <button>Add new Event</button>
                 <div className="events">
                     {events.map(event => (
-                        <Link to={`/view_event/${event.id}`} draggable={"false"} key={event.id}>
-                            <EventCard event={event} />
-                        </Link>
+                        <div key={event.id} className={"event_in_admit_page"}>
+                                <EventCard event={event}/>
+                            <div className="events_button">
+                                <button className="btn_edit" onClick={() => navigate(`edit_event/${event.id}`)}>Edit</button>
+                                <button className="btn_delete" onClick={() => handleDelete(event.id)}>Delete</button>
+                            </div>
+                        </div>
                     ))}
                 </div>
                 {totalPages > 1 && (
@@ -102,4 +122,4 @@ const HomePage = () => {
     );
 };
 
-export default observer(HomePage);
+export default observer(AdminPage);

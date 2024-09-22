@@ -59,6 +59,7 @@
     border-radius: 5px;
     border: none;
     transition: background-color 0.3s ease;
+    margin-top: 25px;
 }
 
 .sing-up {
@@ -73,6 +74,8 @@
     border: none;
     transition: background-color 0.3s ease;
 }
+
+
 
 .sing-up:hover {
     background-color: #b5b5b5;

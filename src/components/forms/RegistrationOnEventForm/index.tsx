@@ -35,7 +35,8 @@ const RegistrationOnEventForm = ({id}: Props) => {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
-            await MembersService.addMember(formData.name, formData.lastname, formData.birthday,
+
+            await MembersService.addMember(formData.name, formData.lastname, new Date(formData.birthday).toISOString(),
                 formData.email, formData.userId, formData.eventId);
             navigate(`/view_event/${formData.eventId}`);
         } catch (e: any) {

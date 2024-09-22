@@ -21,4 +21,8 @@ export class EventsService {
         });
     }
 
+    static async deleteEvent(id: string): Promise<AxiosResponse<void>> {
+        return $api.delete(`/Events/${id}`);
+    }
+
 }

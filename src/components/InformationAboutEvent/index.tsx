@@ -1,24 +1,42 @@
 import './styles.css'
-import {EventsResponse} from "../../types/response/EventsResponse";
-import {CategoryOfEventResponse} from "../../types/response/CategoryOfEventResponse";
-import {Context} from "../../index";
-import {useContext} from "react";
-import {useNavigate} from "react-router-dom";
+import { EventsResponse } from "../../types/response/EventsResponse";
+import { CategoryOfEventResponse } from "../../types/response/CategoryOfEventResponse";
+import { Context } from "../../index";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { MembersService } from "../../api/services/MembersService";
 
 type Props = {
     event: EventsResponse;
     category: CategoryOfEventResponse;
 }
 
-
-const InformationOfEvent = ({event, category}: Props) => {
+const InformationOfEvent = ({ event, category }: Props) => {
     const { store } = useContext(Context);
     const navigate = useNavigate();
+    const [isRegistered, setIsRegistered] = useState(false);
+
+    useEffect(() => {
+        const checkRegistration = async () => {
+            if (store.isAuth) {
+                try {
+                    const response = await MembersService.getMembersByUserId(store.user.id);
+                    console.log(response.data);
+                    if (response.data.some(member => String(member.eventId).toLowerCase() === String(event.id).toLowerCase()))
+                        setIsRegistered(true);
+                } catch (e) {
+                    console.error(e);
+                }
+            }
+        }
+        checkRegistration();
+    }, [event.id, isRegistered, store.isAuth, store.user.id]);
 
     if (!event) {
         return <p>No event information available</p>;
     }
-    const {title, imageUrl, date, description, location, maxNumberOfMembers, numberOfMembers} = event;
+
+    const { title, imageUrl, date, description, location, maxNumberOfMembers, numberOfMembers } = event;
 
     const formatDate = (dateString: string): string => {
         const date = new Date(dateString);
@@ -30,26 +48,21 @@ const InformationOfEvent = ({event, category}: Props) => {
     };
 
     const handleOnClick = () => {
-        if(!store.isAuth){
-            navigate('/login');
-        }
-        else {
-            navigate(`/registration_on_event/${event.id}`);
-        }
+        navigate(`/registration_on_event/${event.id}`);
     };
 
-    const formatImageUrl = (url:string): string => {
-        if (url){
+    const formatImageUrl = (url: string): string => {
+        if (url) {
             url = url.replace(/\s+/g, "%20");
             return `${process.env.PUBLIC_URL}/images/${url}%201280.webp`;
         }
-        return url
+        return url;
     };
 
     return (
         <div className="information-of-event">
             <span className="title">{title}</span>
-            <img className="image" src={formatImageUrl(imageUrl) || "https://placehold.co/1280x720"} alt={title}/>
+            <img className="image" src={formatImageUrl(imageUrl) || "https://placehold.co/1280x720"} alt={title} />
             <span className="description">{description}</span>
             <div className="info">
                 <span className="info-text">{formatDate(date)}</span>
@@ -59,14 +72,17 @@ const InformationOfEvent = ({event, category}: Props) => {
                 <span className="info-text">{location}</span>
                 <span className="info-text">{category.title}</span>
             </div>
-            {(numberOfMembers === maxNumberOfMembers) ? (
-                <button className="full-button">Full</button>
+            {(isRegistered && !(numberOfMembers === maxNumberOfMembers)) ? (
+                <button className="full-button">Already registered</button>
             ) : (
-                <button className="sing-up" onClick={handleOnClick}>Sing up</button>
+                numberOfMembers === maxNumberOfMembers ? (
+                    <button className="full-button">Full</button>
+                ) : (
+                    <button className="sing-up" onClick={handleOnClick}>Sign up</button>
+                )
             )}
-
         </div>
-    )
-}
+    );
+};
 
 export default InformationOfEvent;

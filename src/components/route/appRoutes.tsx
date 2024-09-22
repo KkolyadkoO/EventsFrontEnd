@@ -8,6 +8,8 @@ import {ReactElement, useContext, useEffect, useState} from "react";
 import {Context} from "../../index";
 import ProfilePage from "../pages/ProfilePage";
 import {observer} from "mobx-react-lite";
+import AdminPage from "../pages/AdminPage";
+import EditEventPage from "../pages/EditEventPage";
 
 interface PrivateRouteProps {
     element: ReactElement;
@@ -15,11 +17,24 @@ interface PrivateRouteProps {
     loading: boolean;
 }
 
-const PrivateRoute = ({ element, isAuthenticated, loading }: PrivateRouteProps) => {
+interface AdminRouteProps {
+    element: ReactElement;
+    role: string;
+    loading: boolean;
+}
+
+const PrivateRoute = ({element, isAuthenticated, loading}: PrivateRouteProps) => {
     if (loading) {
         return <div>Loading...</div>;  // Показать лоадер во время загрузки
     }
-    return isAuthenticated ? element : <Navigate to="/login" />;
+    return isAuthenticated ? element : <Navigate to="/login"/>;
+};
+
+const AdminRoute = ({element, role, loading}: AdminRouteProps) => {
+    if (loading) {
+        return <div>Loading...</div>;  // Показать лоадер во время загрузки
+    }
+    return role === "Admin" ? element : <Navigate to="/"/>;
 };
 
 const AppRoutes = () => {
@@ -30,7 +45,7 @@ const AppRoutes = () => {
             if (localStorage.getItem("accessToken")) {
                 await store.checkAuth();
             }
-            setLoading(false);  // Загрузка завершена
+            setLoading(false);
         };
         checkAuth();
     }, [store]);
@@ -44,11 +59,20 @@ const AppRoutes = () => {
                 <Route path='/view_event/:id' element={<ViewEvent/>}> </Route>
                 <Route
                     path="/registration_on_event/:id"
-                    element={<PrivateRoute element={<RegistrationOnEventPage />} isAuthenticated={store.isAuth} loading={loading} />}
+                    element={<PrivateRoute element={<RegistrationOnEventPage/>} isAuthenticated={store.isAuth}
+                                           loading={loading}/>}
                 />
                 <Route
                     path="/profile"
-                    element={<PrivateRoute element={<ProfilePage />} isAuthenticated={store.isAuth} loading={loading} />}
+                    element={<PrivateRoute element={<ProfilePage/>} isAuthenticated={store.isAuth} loading={loading}/>}
+                />
+                <Route
+                    path="/admin_page"
+                    element={<AdminRoute element={<AdminPage/>} role={store.user.role} loading={loading}/>}
+                />
+                <Route
+                    path="admin_page/edit_event/:id"
+                    element={<AdminRoute element={<EditEventPage/>} role={store.user.role} loading={loading}/>}
                 />
             </Routes>
         </Router>
