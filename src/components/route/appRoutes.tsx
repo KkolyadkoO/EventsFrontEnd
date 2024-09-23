@@ -10,6 +10,7 @@ import ProfilePage from "../pages/ProfilePage";
 import {observer} from "mobx-react-lite";
 import AdminPage from "../pages/AdminPage";
 import EditEventPage from "../pages/EditEventPage";
+import AddEventPage from "../pages/AddEventPage";
 
 interface PrivateRouteProps {
     element: ReactElement;
@@ -73,6 +74,10 @@ const AppRoutes = () => {
                 <Route
                     path="admin_page/edit_event/:id"
                     element={<AdminRoute element={<EditEventPage/>} role={store.user.role} loading={loading}/>}
+                />
+                <Route
+                    path="admin_page/add_event"
+                    element={<AdminRoute element={<AddEventPage/>} role={store.user.role} loading={loading}/>}
                 />
             </Routes>
         </Router>

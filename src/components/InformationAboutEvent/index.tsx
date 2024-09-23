@@ -5,13 +5,15 @@ import { Context } from "../../index";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { MembersService } from "../../api/services/MembersService";
+import {LocationOfEventResponse} from "../../types/response/LocationOfEventResponse";
 
 type Props = {
     event: EventsResponse;
     category: CategoryOfEventResponse;
+    location: LocationOfEventResponse;
 }
 
-const InformationOfEvent = ({ event, category }: Props) => {
+const InformationOfEvent = ({ event, category, location }: Props) => {
     const { store } = useContext(Context);
     const navigate = useNavigate();
     const [isRegistered, setIsRegistered] = useState(false);
@@ -36,7 +38,7 @@ const InformationOfEvent = ({ event, category }: Props) => {
         return <p>No event information available</p>;
     }
 
-    const { title, imageUrl, date, description, location, maxNumberOfMembers, numberOfMembers } = event;
+    const { title, imageUrl, date, description, maxNumberOfMembers, numberOfMembers } = event;
 
     const formatDate = (dateString: string): string => {
         const date = new Date(dateString);
@@ -69,7 +71,7 @@ const InformationOfEvent = ({ event, category }: Props) => {
                 <span className="info-text">{numberOfMembers}/{maxNumberOfMembers}</span>
             </div>
             <div className="info">
-                <span className="info-text">{location}</span>
+                <span className="info-text">{location.title}</span>
                 <span className="info-text">{category.title}</span>
             </div>
             {(isRegistered && !(numberOfMembers === maxNumberOfMembers)) ? (

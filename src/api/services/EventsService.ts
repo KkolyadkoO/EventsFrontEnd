@@ -12,13 +12,23 @@ export class EventsService {
         return $api.get<EventsResponse>(`Events/${id}`);
     }
 
-    static async getEventsByFilter(title: string, location: string, startDate: string, endDate: string,
+    static async getEventsByFilter(title: string, locationId: string, startDate: string, endDate: string,
                                    category: string, userId: string, page: string, pageSize: string): Promise<AxiosResponse<FilteredEventsResponse>> {
         return $api.get<FilteredEventsResponse>('/Events/filter', {
             params: {
-                title, location, startDate, endDate, category, userId, page, pageSize
+                title, locationId, startDate, endDate, category, userId, page, pageSize
             }
         });
+    }
+
+    static async updateEvent(id: string, title:string, description: string, date:string, locationId:string,
+                             maxNumberOfMembers: number, categoryId: string, imageUrl: string): Promise<AxiosResponse<string>> {
+        return $api.put(`Events/${id}`, {title, description, date, locationId, maxNumberOfMembers, categoryId, imageUrl});
+    }
+
+    static async addEvent(title:string, description: string, date:string, locationId:string,
+                             maxNumberOfMembers: number, categoryId: string, imageUrl: string): Promise<AxiosResponse<string>> {
+        return $api.post(`Events`, {title, description, date, locationId, maxNumberOfMembers, categoryId, imageUrl});
     }
 
     static async deleteEvent(id: string): Promise<AxiosResponse<void>> {

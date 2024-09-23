@@ -17,6 +17,7 @@ const HomePage = () => {
     const [pageSize, setPageSize] = useState(8);
     const [searchTerm, setSearchTerm] = useState("");
     const [categoryFilter, setCategoryFilter] = useState("");
+    const [locationFilter, setLocationFilter] = useState("");
     const [startDateFilter, setStartDateFilter] = useState("");
     const [endDateFilter, setEndDateFilter] = useState("");
 
@@ -27,7 +28,7 @@ const HomePage = () => {
                 const endDate = endDateFilter ? addHourAndMinutes(endDateFilter) : "";
                 const response = await EventsService.getEventsByFilter(
                     searchTerm,
-                    "",
+                    locationFilter,
                     startDate,
                     endDate,
 
@@ -44,7 +45,7 @@ const HomePage = () => {
             }
         };
         fetchEvents();
-    }, [currentPage, searchTerm, categoryFilter, startDateFilter, endDateFilter]);
+    }, [currentPage, searchTerm, categoryFilter, startDateFilter, endDateFilter, locationFilter]);
 
     useEffect(() => {
         setCurrentPage(1);
@@ -80,7 +81,8 @@ const HomePage = () => {
 
     return (
         <div className='wrapper'>
-            <Header onSearch={setSearchTerm} onCategory={setCategoryFilter} onStartDate={setStartDateFilter} onEndDate={setEndDateFilter}/>
+            <Header onSearch={setSearchTerm} onCategory={setCategoryFilter}
+                    onStartDate={setStartDateFilter} onEndDate={setEndDateFilter} onLocation={setLocationFilter}/>
             <div className='content'>
                 <div className="events">
                     {events.map(event => (

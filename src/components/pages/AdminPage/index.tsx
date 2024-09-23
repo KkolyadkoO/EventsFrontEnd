@@ -19,6 +19,7 @@ const AdminPage = () => {
     const [pageSize, setPageSize] = useState(8);
     const [searchTerm, setSearchTerm] = useState("");
     const [categoryFilter, setCategoryFilter] = useState("");
+    const [locationFilter, setLocationFilter] = useState("");
     const [startDateFilter, setStartDateFilter] = useState("");
     const [endDateFilter, setEndDateFilter] = useState("");
     const [updateEvents, setUpdateEvents] = useState<boolean>(false);
@@ -30,10 +31,9 @@ const AdminPage = () => {
                 const endDate = endDateFilter ? addHourAndMinutes(endDateFilter) : "";
                 const response = await EventsService.getEventsByFilter(
                     searchTerm,
-                    "",
+                    locationFilter,
                     startDate,
                     endDate,
-
                     categoryFilter,
                     "",
                     currentPage.toString(),
@@ -48,7 +48,7 @@ const AdminPage = () => {
         };
         fetchEvents();
         setUpdateEvents(false);
-    }, [currentPage, searchTerm, categoryFilter, startDateFilter, endDateFilter, updateEvents]);
+    }, [currentPage, searchTerm, categoryFilter, startDateFilter, endDateFilter, updateEvents, locationFilter]);
 
     useEffect(() => {
         setCurrentPage(1);
@@ -95,9 +95,9 @@ const AdminPage = () => {
     return (
         <div className='wrapper'>
             <Header onSearch={setSearchTerm} onCategory={setCategoryFilter} onStartDate={setStartDateFilter}
-                    onEndDate={setEndDateFilter}/>
+                    onEndDate={setEndDateFilter} onLocation={setLocationFilter}/>
             <div className='content'>
-                <button>Add new Event</button>
+                <button className="btn_edit" onClick={() => navigate('add_event')}>Add new Event</button>
                 <div className="events">
                     {events.map(event => (
                         <div key={event.id} className={"event_in_admit_page"}>

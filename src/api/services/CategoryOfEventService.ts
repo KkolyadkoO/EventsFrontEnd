@@ -10,4 +10,8 @@ export class CategoryOfEventService {
     static async getCategoryById(id: string | undefined): Promise<AxiosResponse<CategoryOfEventResponse>> {
         return $api.get<CategoryOfEventResponse>(`CategoryOfEvents/${id}`);
     }
+
+    static async addCategory(title: string): Promise<AxiosResponse<string>> {
+        return $api.post<string>(`CategoryOfEvents`, {title});
+    }
 }

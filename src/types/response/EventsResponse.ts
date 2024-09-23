@@ -3,7 +3,7 @@ export interface EventsResponse {
     title: string;
     description: string;
     date: string;
-    location: string;
+    locationId: string;
     categoryId: string;
     maxNumberOfMembers: number;
     numberOfMembers: number;

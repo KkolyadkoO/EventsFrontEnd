@@ -5,22 +5,27 @@ import {Context} from "../../index";
 import {observer} from "mobx-react-lite";
 import {CategoryOfEventResponse} from "../../types/response/CategoryOfEventResponse";
 import {CategoryOfEventService} from "../../api/services/CategoryOfEventService";
+import {LocationOfEventService} from "../../api/services/LocationOfEventService";
+import {LocationOfEventResponse} from "../../types/response/LocationOfEventResponse";
 
 interface HeaderProps {
     onSearch?: (value: string) => void;
     onCategory?: (value: string) => void;
     onStartDate?: (value: string) => void;
     onEndDate?: (value: string) => void;
+    onLocation?: (value: string) => void;
 }
 
-const Header = ({onSearch, onCategory, onEndDate, onStartDate}: HeaderProps) => {
+const Header = ({onSearch, onCategory, onEndDate, onStartDate, onLocation}: HeaderProps) => {
     const {store} = useContext(Context);
     const [categories, setCategories] = useState<CategoryOfEventResponse[]>([]);
+    const [locations, setLocations] = useState<LocationOfEventResponse[]>([]);
     const navigate = useNavigate();
     const location = useLocation();
 
     const [searchTerm, setSearchTerm] = useState("");
     const [category, setCategory] = useState("");
+    const [locationOfEvent, setLocationOfEvent] = useState("");
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
 
@@ -33,7 +38,17 @@ const Header = ({onSearch, onCategory, onEndDate, onStartDate}: HeaderProps) => 
                 console.error(e);
             }
         };
+
+        const fetchLocations = async () => {
+            try {
+                const response = await LocationOfEventService.getAllLocations();
+                setLocations(response.data);
+            } catch (e) {
+                console.error(e);
+            }
+        }
         fetchCategories();
+        fetchLocations();
     }, []);
 
     const handleOnClick = () => {
@@ -50,6 +65,10 @@ const Header = ({onSearch, onCategory, onEndDate, onStartDate}: HeaderProps) => 
     const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         setCategory(e.target.value);
         onCategory && onCategory(e.target.value);
+    };
+    const handleLocationChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        setLocationOfEvent(e.target.value);
+        onLocation && onLocation(e.target.value);
     };
 
     const handleStartDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -71,6 +90,8 @@ const Header = ({onSearch, onCategory, onEndDate, onStartDate}: HeaderProps) => 
         onStartDate && onStartDate("");
         setEndDate("");
         onEndDate && onEndDate("");
+        setLocationOfEvent("");
+        onLocation && onLocation("")
     }
 
     return (
@@ -90,6 +111,12 @@ const Header = ({onSearch, onCategory, onEndDate, onStartDate}: HeaderProps) => 
                         <option value="">All Categories</option>
                         {categories.map(category => (
                             <option key={category.id} value={category.id}>{category.title}</option>
+                        ))}
+                    </select>
+                    <select value={locationOfEvent} onChange={handleLocationChange}>
+                        <option value="">All Locations</option>
+                        {locations.map(location => (
+                            <option key={location.id} value={location.id}>{location.title}</option>
                         ))}
                     </select>
                     <input

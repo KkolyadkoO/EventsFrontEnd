@@ -9,19 +9,18 @@ import {EventsResponse} from "../../../types/response/EventsResponse";
 import {observer} from "mobx-react-lite";
 
 
-const EditEventPage = () => {
-    const {id} = useParams<{ id: string }>();
+const AddEventPage = () => {
 
 
     return (
         <div className='wrapper'>
             <Header/>
             <div className='content'>
-                <EditEventForm eventId={id}/>
+                <EditEventForm eventId={""}/>
             </div>
             <Footer/>
         </div>
     );
 }
 
-export default observer(EditEventPage);
+export default observer(AddEventPage);
