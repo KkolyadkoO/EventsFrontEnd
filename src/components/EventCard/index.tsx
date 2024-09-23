@@ -1,5 +1,6 @@
 import './styles.css';
 import {EventsResponse} from "../../types/response/EventsResponse";
+import $api, {API_URL} from "../../http";
 
 
 type Props = {
@@ -21,8 +22,7 @@ const EventCard = ({event}: Props) => {
 
     const formatImageUrl = (url: string): string => {
         if (url) {
-            url = url.replace(/\s+/g, "%20");
-            return `${process.env.PUBLIC_URL}/images/${url}%20300.webp`;
+            return `http://localhost:5163${url}`;
         }
         return url
     };

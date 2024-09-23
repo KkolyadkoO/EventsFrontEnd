@@ -21,14 +21,20 @@ export class EventsService {
         });
     }
 
-    static async updateEvent(id: string, title:string, description: string, date:string, locationId:string,
-                             maxNumberOfMembers: number, categoryId: string, imageUrl: string): Promise<AxiosResponse<string>> {
-        return $api.put(`Events/${id}`, {title, description, date, locationId, maxNumberOfMembers, categoryId, imageUrl});
+    static async updateEvent(id: string, formData: FormData): Promise<AxiosResponse<string>> {
+        return $api.put(`Events/${id}`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        });
     }
 
-    static async addEvent(title:string, description: string, date:string, locationId:string,
-                             maxNumberOfMembers: number, categoryId: string, imageUrl: string): Promise<AxiosResponse<string>> {
-        return $api.post(`Events`, {title, description, date, locationId, maxNumberOfMembers, categoryId, imageUrl});
+    static async addEvent(formData: FormData): Promise<AxiosResponse<string>> {
+        return $api.post(`Events`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        });
     }
 
     static async deleteEvent(id: string): Promise<AxiosResponse<void>> {

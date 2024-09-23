@@ -6,6 +6,7 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { MembersService } from "../../api/services/MembersService";
 import {LocationOfEventResponse} from "../../types/response/LocationOfEventResponse";
+import {API_URL} from "../../http";
 
 type Props = {
     event: EventsResponse;
@@ -55,10 +56,9 @@ const InformationOfEvent = ({ event, category, location }: Props) => {
 
     const formatImageUrl = (url: string): string => {
         if (url) {
-            url = url.replace(/\s+/g, "%20");
-            return `${process.env.PUBLIC_URL}/images/${url}%201280.webp`;
+            return `http://localhost:5163${url}`;
         }
-        return url;
+        return url
     };
 
     return (
